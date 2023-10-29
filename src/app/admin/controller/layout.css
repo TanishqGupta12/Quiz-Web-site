@@ -1,0 +1,128 @@
+.Slider {
+  display: block;
+  padding: 2vmax;
+  margin-right: 0%;
+  height: 100%;
+  background-color: bisque;
+  height: auto;
+}
+
+.Slider > div {
+  padding: 2vmax;
+  width: 100%;
+  display: block;
+}
+
+.admin_main {
+  width: 100vw;
+  max-width: 100%;
+  display: grid;
+  grid-template-columns: 1.5fr 5fr;
+}
+
+/* create_container */
+
+.admin_main > .create_container {
+  background-color: aquamarine;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.admin_main > .create_container > button {
+  background-color: rgb(81, 184, 8);
+  padding: 1vmax;
+  display: block;
+  border: none;
+  outline: none;
+}
+
+.admin_main > .create_container > form {
+  padding: 1vmax;
+  display: block;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.admin_main > .create_container > form > div {
+  padding: 1vmax;
+  display: block;
+  width: 100%;
+}
+.admin_main > .create_container > form > div > input {
+  padding: 1vmax;
+  display: block;
+  width: 50%;
+}
+
+/* list_container */
+.admin_main > .list_container {
+  width: 100%;
+  padding: 2vmax;
+  margin: auto;
+}
+.admin_main > .list_container > div {
+  display: grid;
+  padding: 2vmax;
+  grid-template-columns: 3fr 2fr  1fr;
+}
+
+/* candidate list */
+
+.candidatelist_container {
+  width: 100%;
+  padding: 2vmax;
+  margin: 5%;
+}
+ /* .candidatelist_container > h1 {
+  
+} */
+.candidatelist_container > .candidatelist_container_grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr 1fr;
+  padding: 2vmax;
+
+}
+
+.candidatelist_container > .candidatelist_container_grid > div > {
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ padding: 1vmax;
+ margin: 1vmax;
+}
+/* Create admin */
+
+.admin_main > .admin_container {
+  padding: 2vmax;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: auto;
+  flex-direction: column;
+}
+
+.admin_main > .admin_container >div{
+    padding: 2vmax;
+    width: 40%;
+}
+
+.admin_main > .admin_container >div >input {
+    padding: 1vmax;
+    width: 100%;
+    outline: none;
+    font:400 1.2vmax "ROBOTO" ;
+}
+
+.admin_main > .admin_container >div:last-child{
+    padding: 2vmax;
+    width: 20%;
+    display: flex;
+    align-items: center;
+}
+.admin_main > .admin_container >div:last-child>button{
+    padding: 0.5vmax;
+    width: 100%;
+    font:400 1.2vmax "ROBOTO" ;
+    
+}

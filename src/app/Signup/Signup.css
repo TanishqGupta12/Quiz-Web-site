@@ -1,0 +1,162 @@
+.signup {
+  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(
+    to bottom,
+    #d16ba5,
+    #c777b9,
+    #ba83ca,
+    #aa8fd8,
+    #9a9ae1,
+    #8aa7ec,
+    #79b3f4,
+    #69bff8,
+    #52cffe,
+    #41dfff,
+    #46eefa,
+    #5ffbf1
+  );
+  height: 100vh;
+  width: 100%;
+}
+
+.container {
+  display: block;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  background: transparent;
+  padding: 6vmax;
+  width: 30em;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 1vmax;
+}
+
+/* .container > h1 {
+} */
+
+.container > div {
+  padding: 1.5vmax;
+  width: 123%;
+  display: flex;
+}
+
+.container > div > input {
+  width: 200%;
+  padding: 0.9vmax;
+  border: none;
+  outline: none;
+  font: 300 1vmax "ROBOTO";
+}
+
+.container > div:last-child {
+  display: flex;
+  justify-content: center;
+}
+.container > div:last-child > button {
+  width: 50%;
+  padding: 0.6vmax;
+  border-radius: 2vmax;
+  background: #d704b8;
+  border: none;
+  font: 300 1vmax "ROBOTO";
+  color: white;
+}
+
+/* .slider_candidate{
+  display: flex;
+  flex-direction: column;
+  padding: 5vmax;
+  width: auto;
+  max-width: 100%;
+  background-color: yellow;
+}
+
+.slider_candidate >div{
+  display: flex;
+  flex-direction: column;
+  padding: 2vmax;
+  width: 130%;
+ 
+}  */
+
+.candidate_main {
+  background-color: rgb(255, 232, 189);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  /* position: relative; */
+}
+
+.couter {
+  width: 100px;
+  border: black 1px solid;
+  height: 25px;
+  position: relative;
+  top: 6vmax;
+}
+
+.couter  > p {
+  width: 100px;
+  
+  text-align: center;
+  font: 600 2vmax "ROBOTO";
+}
+.candidate_main_1 {
+  border: black;
+  border-style: solid;
+  position: relative;
+  top: 5vmax;
+  padding: 2vmax;
+  width: 50%;
+  margin: 2vmax;
+}
+.candidate_main_1 > p {
+  font: 400 2vmax "ROBOTO";
+  padding: 0.5vmax;
+  text-align: center;
+}
+.candidate_main_1 > div {
+  padding: 0.5vmax;
+  margin-left: 20%;
+}
+.candidate_main_1 > div > label {
+  font: 400 1.5vmax "ROBOTO";
+  padding: 0.5vmax;
+  margin-left: 1vmax;
+  text-align: center;
+}
+.candidate_main_1 > div > label > input {
+  padding: 0.5vmax;
+  margin-left: 1vmax;
+  text-align: center;
+}
+
+.candidate_main > button {
+  width: 10%;
+  margin: 2vmax;
+  padding: 1vmax;
+  font: 400 2vmax "ROBOTO";
+}
+
+.CircularProgress{
+  padding: 2vmax;
+position: relative;
+top: 15vmax;
+left: 25vmax;
+font-size: xx-large;
+
+
+}
+
+.CircularProgress_2{
+  padding: 2vmax;
+  position: relative;
+  top: 15vmax;
+  left: 25vmax;
+  margin-left: 10%;
+  font-size: xx-large;
+}

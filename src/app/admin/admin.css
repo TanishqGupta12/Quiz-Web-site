@@ -1,0 +1,59 @@
+.main1 {
+    /* background: rgb(171, 138, 247); */
+    background: aquamarine;
+    display: flex;
+    justify-content: center;
+    padding: 2vmax;
+}
+
+.container {
+    display: block;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    background: white;
+    padding: 6vmax;
+    width: 30em;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 1vmax;
+
+  }
+  
+  .container > h1 {
+  }
+  
+  .container > div {
+    padding: 1.5vmax;
+    width: 123%;
+    display: flex;
+  }
+  
+  .container > div > input {
+    width: 200%;
+    padding: 0.9vmax;
+    border: none;
+    outline: none;
+    font: 300 1vmax "ROBOTO";
+  }
+  
+  .container > div:last-child {
+    display: flex;
+    justify-content: center;
+  }
+  .container > div:last-child > button {
+    width: 50%;
+    padding: 0.6vmax;
+    border-radius: 2vmax;
+    background: #d704b8;
+    border: none;
+    font: 300 1vmax "ROBOTO";
+    color: white;
+  }
+
+  /* layout */
+
+  /* .grid-container{
+    display: grid;
+    column-gap: 50px;
+    grid-template-columns: 1fr 5fr;
+  } */

@@ -1,0 +1,123 @@
+
+
+.main {
+  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to bottom, #d16ba5, #c777b9, #ba83ca, #aa8fd8, #9a9ae1, #8aa7ec, #79b3f4, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1);
+  height: 100vh;
+  width: 100%;
+}
+
+.nav{
+  position: absolute;
+  top: 25px;
+  right: 25px;
+  /* font: 500 1.2vmax "ROBOTO"; */
+  
+}
+
+.nav > a{
+  color: rgb(23, 22, 22);
+  text-decoration: none;
+  font: 500 1.2vmax "ROBOTO";
+}
+
+.main >.main_container {
+  display: block;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  background : transparent;
+   padding: 6vmax;
+    width: 30em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+ 
+}
+
+.main >.main_container >h1 {
+  position: absolute;
+  top: 2vmax;
+  font: 800 3vmax "Roboto";
+  
+}
+.main >.main_container >.login {
+  position: relative;
+  top: 2vmax;
+ display: block;
+ box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+ padding: 1vmax;
+ max-width: 100vmax;
+}
+
+.main >.main_container >.login >div {
+  padding: 2vmax;
+  height: 1vmax;
+}
+
+.main >.main_container >.login >div >input {
+  height: 2vmax;
+  padding: 0.5vmax;
+  /* border-radius: 2vmax; */
+  outline: none;
+  
+  font-size: 1rem;
+  border-style: solid;
+  text-align: center;
+  outline: transparent;
+  width: 100%;
+  transition: border-color calc(var(--transition, 0.2) * 1s) ease;
+}
+.main >.main_container >.login >div:last-child {
+  
+display: flex;
+justify-content: center;
+align-items: center;
+padding: 1vmax;
+margin:0.8vmax ;
+
+}
+.main >.main_container >.login >div:nth-last-child(2) {
+  
+display: flex;
+justify-content: center;
+align-items: center;
+padding: 1vmax;
+margin:0.8vmax ;
+
+}
+.main >.main_container >.login >div:nth-last-child(2) >button {
+  
+  height: 1.5vmax;
+  padding: 0.3vmax;
+  font: 500 1vmax "ROBOTO";
+  border: solid 1px transparent;
+  text-align: center;
+  outline: none;
+  width: 100%;
+  transition: border-color var(--transition, 0.2s) ease;
+  border-radius: 2vmax;
+  width: 9vmax;
+  height: 2vmax;
+  background :#d81584;
+  color: white;
+}
+.main >.main_container >.login >div:last-child >button {
+  
+  height: 1.5vmax;
+  padding: 0.3vmax;
+  font: 500 1vmax "ROBOTO";
+  border: solid 1px transparent;
+  text-align: center;
+  outline: none;
+  width: 100%;
+  transition: border-color var(--transition, 0.2s) ease;
+  border-radius: 2vmax;
+  width: 9vmax;
+  height: 2vmax;
+  background  :#41dfff;
+  color: white;
+
+}
