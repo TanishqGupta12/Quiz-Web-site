@@ -18,4 +18,6 @@ const questionSchema = new db.Schema({
 
 });
 
-export const model =  db.models.questionquizzes || db.model("questionquizzes", questionSchema);
+/** Atlas collection name `questions` (database e.g. `Quiz` from MONGODB_URI). */
+export const model =
+  db.models.Question || db.model("Question", questionSchema, "questions");

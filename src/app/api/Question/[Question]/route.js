@@ -1,38 +1,33 @@
 import { model } from "@/models/Question";
 import { NextResponse } from "next/server";
 
-export async function GET(req , res) {
-    try {
-    const { Question } = res.params;
-
-      const data = await model.findById( Question );
-      return NextResponse.json({ data: data }, { status: 200 });
-    } catch (error) {
-      return NextResponse.json({ data: error }, { status: 500 });
-    }
-  }
-
-export async function DELETE(req, res) {
+export async function GET(_req, { params }) {
   try {
-    const { Question } = res.params;
-    const data = await model.findByIdAndDelete(Question);
-
-    return NextResponse.json({ data: Question }, { status: 200 });
-  } catch (error) {}
-  return NextResponse.json({ data: error.massage }, { status: 500 });
+    const { Question } = params;
+    const data = await model.findById(Question);
+    return NextResponse.json({ data }, { status: 200 });
+  } catch (error) {
+    return NextResponse.json({ data: String(error) }, { status: 500 });
+  }
 }
 
+export async function DELETE(_req, { params }) {
+  try {
+    const { Question } = params;
+    await model.findByIdAndDelete(Question);
+    return NextResponse.json({ data: Question }, { status: 200 });
+  } catch (error) {
+    return NextResponse.json({ data: String(error) }, { status: 500 });
+  }
+}
 
-export async function PUT(req , res) {
-   try {
-    const { Question } = res.params;
+export async function PUT(req, { params }) {
+  try {
+    const { Question } = params;
     const body = await req.json();
-    console.log(body);
-    await model.findByIdAndUpdate(Question ,body)
-    return NextResponse.json({ Success : true }, { status: 200 });
-   } catch (error) {
-    return NextResponse.json({ data: error }, { status: 500 });
-    
-   }
-
+    await model.findByIdAndUpdate(Question, body);
+    return NextResponse.json({ Success: true }, { status: 200 });
+  } catch (error) {
+    return NextResponse.json({ data: String(error) }, { status: 500 });
+  }
 }

@@ -1,100 +1,97 @@
-
 "use client";
 
-import React, { useEffect, useState } from "react";
+import * as React from "react";
 import axios from "axios";
-
+import Box from "@mui/joy/Box";
+import Button from "@mui/joy/Button";
+import FormControl from "@mui/joy/FormControl";
+import FormLabel from "@mui/joy/FormLabel";
+import Input from "@mui/joy/Input";
+import Sheet from "@mui/joy/Sheet";
+import Stack from "@mui/joy/Stack";
+import Textarea from "@mui/joy/Textarea";
+import Typography from "@mui/joy/Typography";
 import Slider from "../../../components/slider";
-import "../../../controller/layout.css";
 
 export default function Questionedit({ params }) {
-  const [question, setQuestion] = useState("");
-  const [options, setOptions] = useState(["", "", ""]);
-  const [correctAnswer, setCorrectAnswer] = useState("");
+  const [question, setQuestion] = React.useState("");
+  const [options, setOptions] = React.useState(["", "", "", ""]);
+  const [correctAnswer, setCorrectAnswer] = React.useState("");
+  const [notice, setNotice] = React.useState("");
 
-  useEffect(() => {
+  React.useEffect(() => {
     const getQuestions = async () => {
       try {
-        const response = await axios.get(
-          `http://localhost:3000/api/Question/${params.Questionedit}`
-        );
-        // setapi(response.data.data);
-        setQuestion(response.data.data.question);
-        setOptions(response.data.data.options);
-        setCorrectAnswer(response.data.data.correctAnswer);
+        const response = await axios.get(`/api/Question/${params.Questionedit}`);
+        const doc = response.data.data;
+        setQuestion(doc.question || "");
+        const opts = doc.options || [];
+        setOptions([0, 1, 2, 3].map((i) => opts[i] || ""));
+        setCorrectAnswer(doc.correctAnswer || "");
       } catch (error) {
-        console.error("Error fetching questions:", error);
+        setNotice("Could not load this question.");
       }
     };
-
     getQuestions();
-  }, [params]);
+  }, [params.Questionedit]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    setNotice("");
     const updatedQuestion = {
-      question: question,
-      option: options,
-      correctAnswer: correctAnswer
+      question,
+      options,
+      correctAnswer,
     };
-
     try {
-      const response = await axios.put(
-        `http://localhost:3000/api/Question/${params.Questionedit}`,
-        updatedQuestion
-      );
-
-      alert("Question updated successfully", response.data.Success);
+      await axios.put(`/api/Question/${params.Questionedit}`, updatedQuestion);
+      setNotice("Saved.");
     } catch (error) {
-      console.log(error.message);
+      setNotice("Update failed.");
     }
   };
 
   return (
-    <>
-      <div className="admin_main">
+    <Box sx={{ minHeight: "100vh", bgcolor: "background.body", p: { xs: 2, md: 3 } }}>
+      <Stack direction={{ xs: "column", md: "row" }} spacing={2} alignItems="flex-start">
         <Slider />
-        <div className="create_container">
+        <Sheet variant="outlined" sx={{ flex: 1, width: "100%", p: { xs: 2, sm: 3 }, borderRadius: "md" }}>
+          <Typography level="h3" sx={{ mb: 2 }}>
+            Edit question
+          </Typography>
           <form onSubmit={handleSubmit}>
-            <div>
-              <textarea
-                rows="15"
-                cols="120"
-                name="Question"
-                value={question}
-                onChange={(e) => {
-                  setQuestion(e.target.value);
-                }}
-              ></textarea>
-            </div>
-            {options.map((option, index) => (
-              <div key={index}>
-                <input
-                  name={`option_${index + 1}`}
-                  value={option}
-                  onChange={(e) => {
-                    var newOptions = [...options];
-                    newOptions[index] = e.target.value;
-                    setOptions(newOptions);
-                  }}
-                />
-              </div>
+            <Stack spacing={2}>
+              <FormControl required>
+                <FormLabel>Prompt</FormLabel>
+                <Textarea minRows={4} value={question} onChange={(ev) => setQuestion(ev.target.value)} />
+              </FormControl>
+              {options.map((option, index) => (
+                <FormControl key={index} required>
+                  <FormLabel>{`Option ${index + 1}`}</FormLabel>
+                  <Input
+                    value={option}
+                    onChange={(ev) => {
+                      const next = [...options];
+                      next[index] = ev.target.value;
+                      setOptions(next);
+                    }}
+                  />
+                </FormControl>
               ))}
-            <div>
-              <label>Answer</label>
-              <input
-                name="Answer"
-                value={correctAnswer}
-                onChange={(e) => {
-                  setCorrectAnswer(e.target.value);
-                }}
-              />
-            </div>
-            <button type="submit">UPDATE</button>
+              <FormControl required>
+                <FormLabel>Correct answer</FormLabel>
+                <Input value={correctAnswer} onChange={(ev) => setCorrectAnswer(ev.target.value)} />
+              </FormControl>
+              {notice ? (
+                <Typography level="body-sm" color={notice.includes("Could not") || notice.includes("failed") ? "danger" : "success"}>
+                  {notice}
+                </Typography>
+              ) : null}
+              <Button type="submit">Save changes</Button>
+            </Stack>
           </form>
-        </div>
-      </div>
-    </>
+        </Sheet>
+      </Stack>
+    </Box>
   );
 }

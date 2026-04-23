@@ -1,90 +1,112 @@
 "use client";
-import React, { useState } from "react";
 
+import * as React from "react";
+import Box from "@mui/joy/Box";
+import Button from "@mui/joy/Button";
+import FormControl from "@mui/joy/FormControl";
+import FormLabel from "@mui/joy/FormLabel";
+import Input from "@mui/joy/Input";
+import Sheet from "@mui/joy/Sheet";
+import Stack from "@mui/joy/Stack";
+import Textarea from "@mui/joy/Textarea";
+import Typography from "@mui/joy/Typography";
 import Slider from "../../components/slider";
-import "../layout.css";
 
 export default function Create() {
-  const [question, setquestionn] = useState("");
-  const [option_1, setOption_1] = useState("");
-  const [option_2, setOption_2] = useState("");
-  const [option_3, setOption_3] = useState("");
-  const [option_4, setOption_4] = useState("");
-  const [correctAnswer, setcorrectAnswer] = useState("");
+  const [question, setQuestion] = React.useState("");
+  const [option1, setOption1] = React.useState("");
+  const [option2, setOption2] = React.useState("");
+  const [option3, setOption3] = React.useState("");
+  const [option4, setOption4] = React.useState("");
+  const [correctAnswer, setCorrectAnswer] = React.useState("");
+  const [status, setStatus] = React.useState("");
+  const [loading, setLoading] = React.useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setStatus("");
+    setLoading(true);
     try {
-      const options = []
-      options[0] = option_1
-      options[1] = option_2
-      options[2] = option_3,
-      options[3] = option_4
-      let result = await fetch("http://localhost:3000/api/Question", {
+      const options = [option1, option2, option3, option4];
+      const res = await fetch("/api/Question", {
         method: "POST",
-        body: JSON.stringify(
-          {question,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          question,
           options,
-          correctAnswer}
-        ),
+          correctAnswer,
+        }),
       });
-
-      console.log(result);
-      
+      if (!res.ok) throw new Error("Request failed");
+      setStatus("Question saved.");
+      setQuestion("");
+      setOption1("");
+      setOption2("");
+      setOption3("");
+      setOption4("");
+      setCorrectAnswer("");
     } catch (error) {
-      console.log(error);
+      setStatus("Could not save. Check the server and try again.");
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <>
-      <div className="admin_main">
+    <Box sx={{ minHeight: "100vh", bgcolor: "background.body", p: { xs: 2, md: 3 } }}>
+      <Stack direction={{ xs: "column", md: "row" }} spacing={2} alignItems="flex-start">
         <Slider />
-        <div className="create_container">
+        <Sheet variant="outlined" sx={{ flex: 1, width: "100%", p: { xs: 2, sm: 3 }, borderRadius: "md" }}>
+          <Typography level="h3" sx={{ mb: 2 }}>
+            New question
+          </Typography>
           <form onSubmit={handleSubmit}>
-            <div>
-              <textarea
-                rows="15"
-                cols="120"
-                value={question}
-                onChange={(e) => setquestionn(e.target.value)}
-              />
-            </div>
-            <div>
-              <input
-                value={option_1}
-                onChange={(e) => setOption_1(e.target.value)}
-              />
-            </div>
-            <div>
-              <input
-                value={option_2}
-                onChange={(e) => setOption_2(e.target.value)}
-              />
-            </div>
-            <div>
-              <input
-                value={option_3}
-                onChange={(e) => setOption_3(e.target.value)}
-              />
-            </div>
-            <div>
-              <input
-                value={option_4}
-                onChange={(e) => setOption_4(e.target.value)}
-              />
-            </div>
-            <div>
-              <label>Answer</label>
-              <input
-                value={correctAnswer}
-                onChange={(e) => setcorrectAnswer(e.target.value)}
-              />
-            </div>
-            <button type="submit">POST</button>
+            <Stack spacing={2}>
+              <FormControl required>
+                <FormLabel>Prompt</FormLabel>
+                <Textarea
+                  minRows={4}
+                  value={question}
+                  onChange={(ev) => setQuestion(ev.target.value)}
+                  placeholder="What do you want candidates to answer?"
+                />
+              </FormControl>
+              <FormControl required>
+                <FormLabel>Option A</FormLabel>
+                <Input value={option1} onChange={(ev) => setOption1(ev.target.value)} />
+              </FormControl>
+              <FormControl required>
+                <FormLabel>Option B</FormLabel>
+                <Input value={option2} onChange={(ev) => setOption2(ev.target.value)} />
+              </FormControl>
+              <FormControl required>
+                <FormLabel>Option C</FormLabel>
+                <Input value={option3} onChange={(ev) => setOption3(ev.target.value)} />
+              </FormControl>
+              <FormControl required>
+                <FormLabel>Option D</FormLabel>
+                <Input value={option4} onChange={(ev) => setOption4(ev.target.value)} />
+              </FormControl>
+              <FormControl required>
+                <FormLabel>Correct answer</FormLabel>
+                <Input
+                  value={correctAnswer}
+                  onChange={(ev) => setCorrectAnswer(ev.target.value)}
+                  placeholder="Must match one option exactly"
+                />
+              </FormControl>
+              {status ? (
+                <Typography level="body-sm" color={status.includes("Could not") ? "danger" : "success"}>
+                  {status}
+                </Typography>
+              ) : null}
+              <Button type="submit" loading={loading}>
+                Save question
+              </Button>
+            </Stack>
           </form>
-        </div>
-      </div>
-    </>
+        </Sheet>
+      </Stack>
+    </Box>
   );
 }
